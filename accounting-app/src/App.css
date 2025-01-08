@@ -1,0 +1,80 @@
+.App-header {
+  background-color: #ffffff;
+  padding: 10px;
+  color: white;
+}
+
+.form-container {
+  margin: 20px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-container input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.vendors-list ul {
+  list-style: none;
+  padding: 5px;
+  margin: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.vendor-item {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #e8f5e9;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.transactions-table {
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 5px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.pagination-button.active {
+  background-color: green;
+  color: white;
+}
+
+.pagination-button.inactive {
+  background-color: blue;
+  color: white;
+}
+
