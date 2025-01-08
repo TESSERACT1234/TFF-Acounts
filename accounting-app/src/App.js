@@ -576,7 +576,7 @@ function App() {
 
   // Fetch transactions from the backend
   useEffect(() => {
-    axios.get("http://localhost:5000/transactions").then((res) => {
+    axios.get("https://tff-accounts-backend.onrender.com").then((res) => {
       setTransactions(res.data);
     });
   }, []);
