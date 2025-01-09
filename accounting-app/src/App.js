@@ -18,7 +18,7 @@
 
 //   // Fetch transactions from the backend
 //   useEffect(() => {
-//     axios.get("http://localhost:5000/transactions").then((res) => {
+//     axios.get("http://localhost:5001/transactions").then((res) => {
 //       setTransactions(res.data);
 //     });
 //   }, []);
@@ -30,7 +30,7 @@
 
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
-//     axios.post("http://localhost:5000/transactions", formData).then((res) => {
+//     axios.post("http://localhost:5001/transactions", formData).then((res) => {
 //       setTransactions([...transactions, res.data]);
 //       setFormData({
 //         vendor: "",
@@ -44,7 +44,7 @@
 //   };
 
 //   const handleDelete = (id) => {
-//     axios.delete(`http://localhost:5000/transactions/${id}`).then(() => {
+//     axios.delete(`http://localhost:5001/transactions/${id}`).then(() => {
 //       setTransactions(transactions.filter((t) => t._id !== id));
 //     });
 //   };
@@ -246,7 +246,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/transactions", formData).then((res) => {
+    axios.post("http://localhost:5001/transactions", formData).then((res) => {
       setTransactions([...transactions, res.data]);
       setFormData({
         vendor: "",
@@ -262,7 +262,7 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    axios.delete("http:\\localhost:5000/transactions/${id}").then(() => {
+    axios.delete("http:\\localhost:5001/transactions/${id}").then(() => {
       setTransactions(transactions.filter((t) => t._id !== id));
     });
   };
@@ -576,7 +576,7 @@ function App() {
 
   // Fetch transactions from the backend
   useEffect(() => {
-    axios.get("https://tff-accounts-backend.onrender.com").then((res) => {
+    axios.get("http://localhost:5001/transactions").then((res) => {
       setTransactions(res.data);
     });
   }, []);
@@ -588,7 +588,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/transactions", formData).then((res) => {
+    axios.post("http://localhost:5001/transactions", formData).then((res) => {
       setTransactions([...transactions, res.data]);
       setFormData({
         vendor: "",
@@ -605,7 +605,7 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/transactions/${id}`).then(() => {
+    axios.delete(`http://localhost:5001/transactions/${id}`).then(() => {
       setTransactions(transactions.filter((t) => t._id !== id));
     });
   };
