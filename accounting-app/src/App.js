@@ -512,14 +512,44 @@ import "./App.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { ToastContainer, toast } from 'react-toastify';
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBi1zSw4YFDQ6NbbIikj9ek0wTkWGecK0k",
+  authDomain: "tff-accounts.firebaseapp.com",
+  projectId: "tff-accounts",
+  storageBucket: "tff-accounts.firebasestorage.app",
+  messagingSenderId: "637310148058",
+  appId: "1:637310148058:web:58f94d00648ada935eb4e3"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+
+
+
 
 function App() {
   const notify = () => toast("Transaction Added Successfully");
   const currentDate = new Date().toISOString().split('T')[0];
 
+  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const transactionsPerPage = 5;
+
+  const [loading, setLoading] = useState(true);
+  
+
+  
 
   const calculateTotals = () => {
     const filteredTransactions = transactions.filter(
@@ -581,6 +611,31 @@ function App() {
     });
   }, []);
 
+ 
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setUser(userCredential.user);
+      toast.success("Login successful!");
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Login failed!");
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      toast.success("Logged out successfully!");
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error("Logout failed!");
+    }
+  };
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -639,6 +694,101 @@ function App() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  
+
+  if (!user) {
+    // Render login form if user is not logged in
+    return (
+      <div
+        className="login-container"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+          backgroundColor: "#f5f5f5",
+          fontFamily: "'Arial', sans-serif",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "#ffffff",
+            padding: "30px",
+            borderRadius: "10px",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            maxWidth: "400px",
+            width: "90%",
+          }}
+        >
+          <center>    <img src="./tfflogo .png" alt="Company Logo" className="logo-img" style={{ width: "300px" }} />
+          </center>
+          <h2
+            style={{
+              marginBottom: "20px",
+              color: "#333",
+              textAlign: "center",
+            }}
+          >
+            Login
+          </h2>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px",
+              marginBottom: "15px",
+              border: "1px solid #ddd",
+              borderRadius: "5px",
+              fontSize: "16px",
+              boxSizing: "border-box",
+            }}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "12px",
+              marginBottom: "20px",
+              border: "1px solid #ddd",
+              borderRadius: "5px",
+              fontSize: "16px",
+              boxSizing: "border-box",
+            }}
+          />
+          <button
+            onClick={handleLogin}
+            style={{
+              width: "100%",
+              padding: "12px",
+              backgroundColor: "#4CAF50",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              fontSize: "16px",
+              cursor: "pointer",
+              transition: "background-color 0.3s ease",
+            }}
+            onMouseOver={(e) => (e.target.style.backgroundColor = "#45a049")}
+            onMouseOut={(e) => (e.target.style.backgroundColor = "#4CAF50")}
+          >
+            Login
+          </button>
+          <ToastContainer />
+        </div>
+        <center style={{ marginBottom: "0%" }}><p>Made with ❤ by Tesseract Tech</p>
+          <p>All rights reserved Tesseract Flex Fuel Private Limited & Khemchand Vaijnath Shah</p></center>
+      </div>
+
+    );
+  }
+  
 
   return (
     <div className="App">
@@ -648,6 +798,34 @@ function App() {
         <h1 style={{ color: "#4CAF50" }}>
           <center>Accounts</center>
         </h1>
+        <button
+          onClick={handleLogout}
+          style={{
+            float: "right",
+            padding: "10px 20px",
+            backgroundColor: "#f44336",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            fontSize: "14px",
+            fontWeight: "bold",
+            cursor: "pointer",
+            transition: "background-color 0.3s ease, transform 0.2s ease",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            margin:"10px",
+          }}
+          onMouseOver={(e) => {
+            e.target.style.backgroundColor = "#d32f2f";
+            e.target.style.transform = "scale(1.05)";
+          }}
+          onMouseOut={(e) => {
+            e.target.style.backgroundColor = "#f44336";
+            e.target.style.transform = "scale(1)";
+          }}
+        >
+          Logout
+        </button>
+
       </header>
 
       <div className="container">
@@ -751,7 +929,7 @@ function App() {
                 <center>All Transactions</center>
               </h1>
               <center>
-              <h3><b>Balance :{((calculateOverallTotals().totalCredit-calculateOverallTotals().totalDebit)/ 10000000).toFixed(2) } Cr </b></h3>
+                <h3><b>Balance :{((calculateOverallTotals().totalCredit - calculateOverallTotals().totalDebit) / 10000000).toFixed(2)} Cr </b></h3>
                 <table className="transactions-table">
                   <thead>
                     <tr>
@@ -766,16 +944,16 @@ function App() {
                       <tr key={t._id} >
                         <td>{t.date}</td>
                         <td>{t.vendor}</td>
-                        <td style={{color:"green"}}>{t.transactionType === "Credit" ? t.cost : ""}</td>
-                        <td style={{color:"red"}}>{t.transactionType === "Debit" ? t.cost : ""}</td>
+                        <td style={{ color: "green" }}>{t.transactionType === "Credit" ? t.cost : ""}</td>
+                        <td style={{ color: "red" }}>{t.transactionType === "Debit" ? t.cost : ""}</td>
                       </tr>
                     ))}
                   </tbody>
                   <tfoot>
                     <tr>
                       <td colSpan="2"><b>Total</b></td>
-                      <td style={{color:"green"}}><b>{calculateOverallTotals().totalCredit}</b></td>
-                      <td style={{color:"red"}}><b>{calculateOverallTotals().totalDebit}</b></td>
+                      <td style={{ color: "green" }}><b>{calculateOverallTotals().totalCredit}</b></td>
+                      <td style={{ color: "red" }}><b>{calculateOverallTotals().totalDebit}</b></td>
                     </tr>
                   </tfoot>
                 </table>
@@ -793,7 +971,7 @@ function App() {
                   ))}
                 </div>
               </center>
-             
+
             </div>
 
           </div>
