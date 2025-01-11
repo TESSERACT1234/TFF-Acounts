@@ -18,7 +18,7 @@
 
 //   // Fetch transactions from the backend
 //   useEffect(() => {
-//     axios.get("http://localhost:5001/transactions").then((res) => {
+//     axios.get("https://tff-acounts-backend.onrender.com/transactions").then((res) => {
 //       setTransactions(res.data);
 //     });
 //   }, []);
@@ -30,7 +30,7 @@
 
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
-//     axios.post("http://localhost:5001/transactions", formData).then((res) => {
+//     axios.post("https://tff-acounts-backend.onrender.com/transactions", formData).then((res) => {
 //       setTransactions([...transactions, res.data]);
 //       setFormData({
 //         vendor: "",
@@ -44,7 +44,7 @@
 //   };
 
 //   const handleDelete = (id) => {
-//     axios.delete(`http://localhost:5001/transactions/${id}`).then(() => {
+//     axios.delete(`https://tff-acounts-backend.onrender.com/transactions/${id}`).then(() => {
 //       setTransactions(transactions.filter((t) => t._id !== id));
 //     });
 //   };
@@ -246,7 +246,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5001/transactions", formData).then((res) => {
+    axios.post("https://tff-acounts-backend.onrender.com/transactions", formData).then((res) => {
       setTransactions([...transactions, res.data]);
       setFormData({
         vendor: "",
@@ -606,7 +606,7 @@ function App() {
 
   // Fetch transactions from the backend
   useEffect(() => {
-    axios.get("http://localhost:5001/transactions").then((res) => {
+    axios.get("https://tff-acounts-backend.onrender.com/transactions").then((res) => {
       setTransactions(res.data);
     });
   }, []);
@@ -643,7 +643,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5001/transactions", formData).then((res) => {
+    axios.post("https://tff-acounts-backend.onrender.com/transactions", formData).then((res) => {
       setTransactions([...transactions, res.data]);
       setFormData({
         vendor: "",
@@ -660,7 +660,7 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:5001/transactions/${id}`).then(() => {
+    axios.delete(`https://tff-acounts-backend.onrender.com/transactions/${id}`).then(() => {
       setTransactions(transactions.filter((t) => t._id !== id));
     });
   };
